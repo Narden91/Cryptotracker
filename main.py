@@ -9,7 +9,7 @@ import yfinance as yf
 import plotly.graph_objs as go
 
 # Get Bitcoin data (period: 1m , 1h, 1d, 1wk, 1mo)
-data = yf.download(tickers='BTC-EUR', period = '10d', interval = '6h')
+data = yf.download(tickers='BTC-EUR', period = '10d', interval = '1h')
 
 #declare figure
 fig = go.Figure()
@@ -23,11 +23,14 @@ fig.add_trace(go.Candlestick(x=data.index,
 
 # Add titles
 fig.update_layout(
-    title='Bitcoin live share price evolution',
-    yaxis_title='Bitcoin Price (kUS Dollars)')
+    title='Grafico evoluzione prezzo bitcoin',
+    yaxis_title='Bitcoin Price (kEUR Euros)')
 
 # X-Axes
 fig.update_xaxes(
+    tickmode = 'linear',
+    tick0 = 10,
+    # dtick = 0.75,
     rangeslider_visible=True,
     rangeselector=dict(
         buttons=list([
@@ -39,6 +42,7 @@ fig.update_xaxes(
         ])
     )
 )
+
 
 #Show
 fig.show()
